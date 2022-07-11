@@ -73,14 +73,33 @@ void insetAtPostion(Node* &head, Node* &tail, int data, int pos){
 }
 
 // traversing
-void printLL(Node* &head){
+void printLL(Node* &head, Node* &tail){
      Node* temp = head;
      while(temp !=NULL){
          cout << temp->data << " ";
          temp = temp->next;
      }
      cout << endl;
+     cout << "head: " << head->data << endl;
+     cout << "tail: " << tail->data << endl;
      return;
+}
+
+//reverse
+void reverse(Node* &head, Node* &tail){
+    Node* curr = head;
+    tail = head;
+    Node* prev = NULL;
+    Node* next = NULL;
+    while(curr != NULL){
+        next = curr -> next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    head = prev;
+    // debug point
+    //cout << "check" << head -> next->data <<endl;
 }
 
 int main() {
@@ -90,12 +109,15 @@ int main() {
     insertAtBegin(head, 20);
     insertAtBegin(head, 50);
     // insertAtBegin(head, 60);
-    printLL(head);
+    // printLL(head, tail);
     insertAtEnd(tail, 80);
     insertAtEnd(tail, 100);
-    printLL(head);
-    deleteAtNode(head, 5);
+    printLL(head, tail);
+    //deleteAtNode(head, 5);
+    reverse(head,tail);
     // insetAtPostion(head, tail ,120,7);
-    printLL(head);
+    printLL(head, tail);
+    insetAtPostion(head, tail ,120,6);
+    printLL(head, tail);
     return 0;
 }
