@@ -102,6 +102,44 @@ void reverse(Node* &head, Node* &tail){
     //cout << "check" << head -> next->data <<endl;
 }
 
+//reverse in a group
+Node* reverseByGroup(Node* &head, Node* &tail,int k){
+    if(head == NULL) return NULL;
+    Node* curr = head;
+    Node* prev = NULL;
+    Node* next = NULL;
+    int count=0;
+    while(curr != NULL && count < k){
+        next = curr -> next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+        count++;
+    }
+    if(next != NULL){
+        head->next = reverseByGroup(next,k);
+    }
+    return prev;
+}
+
+//reverse by recusion
+void reverseByRecursion(Node* &head, Node* &curr, Node* &prev){
+    if(curr == NULL){
+        head = prev;
+        return;
+    }
+    Node* next = curr -> next;
+    reverseByRecursion(head, next, curr);
+    curr->next = prev;
+}
+
+void reverseCall(Node* &head, Node* &tail){
+    Node* curr = head;
+    Node* prev = NULL;
+    tail  = head;
+    reverseByRecursion(head, curr, prev);
+}
+
 int main() {
     Node* node1 = new Node(10);
     Node* head = node1;
@@ -111,13 +149,16 @@ int main() {
     // insertAtBegin(head, 60);
     // printLL(head, tail);
     insertAtEnd(tail, 80);
+    insertAtEnd(tail, 90);
     insertAtEnd(tail, 100);
     printLL(head, tail);
     //deleteAtNode(head, 5);
-    reverse(head,tail);
+    // reverse(head,tail);
+    //reverseCall(head, tail);
     // insetAtPostion(head, tail ,120,7);
+    head = reverseByGroup(head,tail, 2);
     printLL(head, tail);
-    insetAtPostion(head, tail ,120,6);
-    printLL(head, tail);
+    //insetAtPostion(head, tail ,120,6);
+    //printLL(head, tail);
     return 0;
 }
