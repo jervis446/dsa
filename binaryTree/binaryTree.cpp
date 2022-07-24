@@ -38,6 +38,18 @@ void levelOrderTraversal(node* root) {
         if(temp->right) q.push(temp->right);
     }
 }
+
+void leverl(node* root) {
+    queue <node* > q;
+    q.push(root);
+    while(!q.empty()) {
+        node* temp = q.front();
+        q.pop();
+        cout << temp->data <<endl;
+        if(temp -> left) q.push(temp->left);
+        if(temp -> right) q.push(temp->right);
+    }
+}
 void inorder(node* root) {
     if(root == NULL) return;
     inorder(root -> left);
