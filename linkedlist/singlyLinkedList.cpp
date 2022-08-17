@@ -17,6 +17,25 @@ class Node {
     };
 };
 
+class node {
+    public:
+    int data;
+    Node* prev;
+    Node* next;
+    Node(int data){
+        this -> data = data;
+        this -> next = NULL;
+        this -> prev = NULL;
+    };
+    ~Node(){
+        if(this -> next != NULL){
+            delete next;
+            this -> next = NULL;
+            this -> prev = NULL;
+        }
+    };
+};
+
 // deleting linked List
 void deleteAtNode(Node* &head, int pos){
     if(pos == 1){
